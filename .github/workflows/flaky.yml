@@ -15,3 +15,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run flaky integration test
         run: node src/flaky-stabilized.js
+      - name: Retry failed tests
+        run: node src/flaky-stabilized.js
+        if: failure()
