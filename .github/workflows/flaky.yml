@@ -1,0 +1,20 @@
+name: Flaky Integration Tests
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    # Runs every 30 min to generate failure history quickly during testing
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run flaky integration test
+        run: node src/flaky.js
+        # This intentionally fails ~60% of the time
+        # Push 5+ times to main to build up failure history
+        # AEGIS will detect the anomaly once 3/5 recent runs fail

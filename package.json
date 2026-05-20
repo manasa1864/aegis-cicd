@@ -1,0 +1,10 @@
+{
+  "name": "aegis-cicd-test",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node src/tests.js",
+    "test:flaky": "node src/flaky.js",
+    "build": "echo 'Build complete'",
+    "lint": "echo 'Lint passed'"
+  }
+}

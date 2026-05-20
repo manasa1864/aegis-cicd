@@ -1,0 +1,29 @@
+name: Manual Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options: [staging, production]
+      dry_run:
+        description: 'Dry run only'
+        type: boolean
+        default: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy
+        run: |
+          echo "Deploying to ${{ github.event.inputs.environment }}"
+          echo "Dry run: ${{ github.event.inputs.dry_run }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          sleep 5
+          echo "Done."
