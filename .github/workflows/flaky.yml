@@ -14,7 +14,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run flaky integration test
-        run: node src/flaky.js
-        # This intentionally fails ~60% of the time
-        # Push 5+ times to main to build up failure history
-        # AEGIS will detect the anomaly once 3/5 recent runs fail
+        run: node src/flaky-stabilized.js
