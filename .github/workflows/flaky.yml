@@ -14,7 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run flaky integration test
-        run: node src/flaky-stabilized.js || echo 'File not found, please check repository'
+        run: |
+          if [ -f src/flaky-stabilized.js ]; then
+            node src/flaky-stabilized.js
+          else
+            echo 'File not found, please check repository'
       - name: Retry failed tests
-        run: node src/flaky-stabilized.js || echo 'File not found, please check repository'
+        run: |
+          if [ -f src/flaky-stabilized.js ]; then
+            node src/flaky-stabilized.js
+          else
+            echo 'File not found, please check repository'
         if: failure()
